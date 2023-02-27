@@ -1,0 +1,5 @@
+Mi nombre es Carlos Javier
+Mi apellido es Lozano
+Mi edad son 36 años
+Mi lenguaje favorito es Python
+aunque también me gusta javascript

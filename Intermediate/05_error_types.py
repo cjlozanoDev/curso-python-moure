@@ -34,3 +34,18 @@ print(my_dict["Apellido"])
 print(my_list[0])
 
 # ImportError
+# from math import PI € Error
+from math import pi
+print(pi)
+
+# ValueError
+# my_int = int("10 años") # Error
+my_int = int("10")
+print(type(my_int))
+
+# ZeroDivisionError
+# print(4/0) # Error
+print(4/2)
+
+
+
