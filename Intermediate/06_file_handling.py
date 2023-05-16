@@ -32,3 +32,32 @@ json_test = {
 
 json.dump(json_test, json_file, indent = 2)
 
+json_file.close()
+
+with open("Intermediate/my_file.json") as my_other_json_file:
+    for line in my_other_json_file.readlines():
+        print(line)
+
+json_dict = json.load(open("Intermediate/my_file.json"))
+print(json_dict)
+print(type(json_dict))
+print(json_dict["name"])
+
+# .csv file
+
+import csv
+
+csv_file = open("Intermediate/my_file.csv", "w+")
+
+csv_writer = csv.writer(csv_file)
+csv_writer.writerow(["Name", "Surname", "Age", "language", "Website"])
+csv_writer.writerow(["Carlos Javier", "Lozano", 36, "python", "https://github.com/cjlozanodev"])
+csv_writer.writerow(["Roswel", "", 2, "COBOL", ""])
+
+csv_file.close()
+
+with open("Intermediate/my_file.csv") as my_other_csv_file:
+    for line in my_other_csv_file.readlines():
+        print(line)
+
+
