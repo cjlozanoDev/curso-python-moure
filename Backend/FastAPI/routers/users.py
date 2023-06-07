@@ -1,7 +1,7 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
-app = FastAPI()
+router = APIRouter()
 
 # Inicia el server: uvicorn users:app --reload
 
@@ -18,7 +18,7 @@ users_list = [User(id=1, name="Carlos Javier", surname="Lozano", url="https://ww
               User(id=3, name="Celia", surname="Lozano", url="No tiene", age=34)]
 
 
-@app.get("/usersjson")
+@router.get("/usersjson")
 async def usersjson():
     return [
           {
@@ -41,33 +41,33 @@ async def usersjson():
           }
     ]
 
-@app.get("/users")
+@router.get("/users")
 async def users():
     return users_list
 
 # Path
-@app.get("/user/{id}")
+@router.get("/user/{id}")
 async def user(id: int):
     return search_user(id)
 
 
 # Query
 
-@app.get("/userquery/")
+@router.get("/userquery/")
 async def user(id: int):
     return search_user(id)
 
 
-@app.post("/user/")
+@router.post("/user/", response_model=User, status_code=201)
 async def user(user: User):
   if type(search_user(user.id)) == User:
-    return {"error": "El usuario ya existe"}
+    raise HTTPException(status_code=404, detail="El usuario ya existe")
   else:
     users_list.append(user)
     return user
 
 
-@app.put("/user")
+@router.put("/user")
 async def user(user: User):
   found = False
 
@@ -82,7 +82,7 @@ async def user(user: User):
   return user 
 
 
-@app.delete("/user/{id}")
+@router.delete("/user/{id}")
 async def user(id: int):
 
   found = False
